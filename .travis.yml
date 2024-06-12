@@ -17,7 +17,7 @@ after_success:
 
   #login to docker cli
   - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_ID" --password-stdin
-  - #push images to dockerhub
+  
   - docker push aneculau/multi-client
   - docker push aneculau/multi-nginx
   - docker push aneculau/multi-server

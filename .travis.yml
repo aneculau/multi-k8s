@@ -1,0 +1,17 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t aneculau/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true aneculau/react-test npm test
+
+after_success:
+  - docker build -t aneculau/multi-client ./client
+  - docker build -t aneculau/multi-nginx ./nginx
+  - docker build -t aneculau/multi-server ./server
+  - docker build -t aneculau/multi-worker ./worker
+
